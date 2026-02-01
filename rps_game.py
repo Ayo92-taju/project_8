@@ -64,7 +64,7 @@ def display_round(name, p, c, result):
 
 
 def display_score(name, player_score, cpu_score):
-    print(f"\nScore → {name}: {player_score} | CPU: {cpu_score}")
+    print(f"\nScore -- {name}: {player_score} | CPU: {cpu_score}")
 
 
 if __name__ == "__main__":
