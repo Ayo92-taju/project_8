@@ -31,7 +31,7 @@ def player_choice():
             print("3. Scissors")
             choice = int(input())
 
-            if choice not in range(1, 3):
+            if choice not in range(1, 4):
                 print("Please choose from 1-3")
                 continue
 
