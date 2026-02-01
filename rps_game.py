@@ -2,57 +2,70 @@ import random
 
 def main():
     name = input("\nEnter name: ")
-    
-    scores = []
-    choice1 = player_choice()
-    choice2 = cpu_choice()
-    scoring(choice1, choice2, scores)
-    display_score(name, scores)
-    
+
+    player_score = 0
+    cpu_score = 0
+
+    while True:
+        choice1 = player_choice()
+        choice2 = cpu_choice()
+
+        result, player_score, cpu_score = scoring(
+            choice1, choice2, player_score, cpu_score
+        )
+
+        display_round(name, choice1, choice2, result)
+        display_score(name, player_score, cpu_score)
+
+        again = input("\nPlay again? (y/n): ").lower()
+        if again != "y":
+            break
+
+
 def player_choice():
-    try:
-        while True:
-            print("\nSelect option:\n")
+    while True:
+        try:
+            print("\nSelect option:")
             print("1. Rock")
             print("2. Paper")
             print("3. Scissors")
             choice = int(input())
-            
-            if choice not in range(1, 3):
-                print("Please choose from 1-3")
+
+            if choice not in range(1, 4):
+                print("Please choose from 1–3")
                 continue
-            else:
-                return choice
-            
-    except ValueError:
-        print("Please enter an integer (1-3)")
-    except Exception as e:
-            print(f"An unexpected error occurred: {e}\n")
-            
+
+            return choice
+
+        except ValueError:
+            print("Please enter a number (1–3)")
+
+
 def cpu_choice():
-    choice = random.randint(1, 3)
-    return choice
+    return random.randint(1, 3)
 
-def scoring(choice1, choice2, scores):
-    score = {"Player": player_score, "CPU": cpu_score}
-    if choice1 == choice2:
-        player_score += 0
-        cpu_score += 0 
-    
-    elif (choice1 == 1 and choice2 == 2) or (choice1 == 2 and choice2 == 3) or (choice1 == 3 and choice2 == 1):
-        player_score += 0
-        cpu_score += 1
-    
-    elif (choice2 == 1 and choice1 == 2) or (choice2 == 2 and choice1 == 3) or (choice2 == 3 and choice1 == 1):
-        player_score += 1
-        cpu_score += 0
-        
-    return scores.append(score)
 
-def display_score(name, scores):
-    for i, score in enumerate(scores, start = 1):
-                print(f"{name}: {scores["Player"]} | CPU: {scores["CPU"]}")
-    
+def scoring(p, c, player_score, cpu_score):
+    if p == c:
+        return "Draw", player_score, cpu_score
+
+    elif (p == 1 and c == 3) or (p == 2 and c == 1) or (p == 3 and c == 2):
+        return "Player wins", player_score + 1, cpu_score
+
+    else:
+        return "CPU wins", player_score, cpu_score + 1
+
+
+def display_round(name, p, c, result):
+    choices = {1: "Rock", 2: "Paper", 3: "Scissors"}
+    print(f"\n{name} chose {choices[p]}")
+    print(f"CPU chose {choices[c]}")
+    print(result)
+
+
+def display_score(name, player_score, cpu_score):
+    print(f"\nScore → {name}: {player_score} | CPU: {cpu_score}")
+
 
 if __name__ == "__main__":
     main()
