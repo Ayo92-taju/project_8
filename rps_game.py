@@ -48,7 +48,7 @@ class Game:
 
         elif (p_choice == 1 and c_choice == 3) or (p_choice == 2 and c_choice == 1) or (p_choice == 3 and c_choice == 2):
             self.player.score += 1
-            print("Player wins")
+            print(f"{self.player.name} wins")
 
         else:
             self.cpu.score += 1
@@ -68,6 +68,7 @@ class Game:
             if again != "y":
                 break
 
-app = Game()
+
 if __name__ == "__main__":
+    app = Game()
     app.main()
