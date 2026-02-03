@@ -64,7 +64,7 @@ class Game:
             self.play()
             self.displayScore()
             
-            again = input("\nDo you want to play another round? (y/n)").lower
+            again = input("\nDo you want to play another round? (y/n)").lower()
             if again != "y":
                 break
 
