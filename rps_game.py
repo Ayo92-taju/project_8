@@ -5,7 +5,7 @@ class Player:
         self.name = name
         self.score = 0
         
-    def choose():
+    def choose(self):
         while True:
             try:
                 print("\nSelect option:")
@@ -27,7 +27,7 @@ class CPU:
     def __init__(self):
         self.score = 0
         
-    def choose():
+    def choose(self):
         return random.randint(1, 3)
         
 class Game:
@@ -41,8 +41,8 @@ class Game:
         p_choice = self.player.choose()
         c_choice = self.cpu.choose()
         
-        print(f"{self.player.name} chose {self.choices(p_choice)}")
-        print(f"CPU chose {self.choices(c_choice)}")
+        print(f"{self.player.name} chose {self.choices[p_choice]}")
+        print(f"CPU chose {self.choices[c_choice]}")
         if p_choice == c_choice:
             print("Draw")
 
@@ -56,7 +56,7 @@ class Game:
     
     def displayScore(self):
         print("\nScores:")
-        print(f"Player: {self.player.score}")
+        print(f"{self.player.name}: {self.player.score}")
         print(f"CPU: {self.cpu.score}")
         
     def main(self):
@@ -64,7 +64,7 @@ class Game:
             self.play()
             self.displayScore()
             
-            again = input("Do you want to play another round? (y/n)").lower
+            again = input("\nDo you want to play another round? (y/n)").lower
             if again != "y":
                 break
 
